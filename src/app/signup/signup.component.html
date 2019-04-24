@@ -1,0 +1,70 @@
+<p>
+  signup works!
+</p>
+
+  <form [formGroup]="signupForm" (ngSubmit)="signup()">
+    <div class="container">
+      <div class="form-group">
+          Frist Name
+          <input type="text" class="form-control" formControlName="firstName" name="firstname">
+          <div *ngIf="signupForm.controls.firstName.invalid && 
+                      signupForm.controls.firstName.touched" 
+                      class="alert alert-danger">
+              First Name Required!
+          </div>
+
+          Last Name
+          <input type="text" class="form-control" formControlName="lastName" name="lastname" required>
+          <div *ngIf="signupForm.controls.lastName.invalid && 
+                      signupForm.controls.lastName.touched" 
+                      class="alert alert-danger">
+              Last Name Required!
+          </div>
+      </div>
+
+      <div class="form-group">
+          Password
+          <input type="password" class="form-control" formControlName="password" name="password">
+          <div *ngIf="signupForm.controls.password.invalid && 
+                    signupForm.controls.password.dirty"
+                    class="alert alert-danger">
+            Password Required!
+          </div>
+          Confirm Password
+          <input type="password" class="form-control" formControlName="confirmPassword" name="confirmPassword">
+          <div *ngIf="signupForm.controls.confirmPassword.invalid && 
+                    signupForm.controls.confirmPassword.dirty"
+                    class="alert alert-danger">
+            Must Confirm Password!
+          </div>
+          <div *ngIf="passwordNotMatching" class="alert alert-danger">
+            Passwords Must Match!
+          </div>
+        </div>
+
+      <div class="form-group">
+          Email:
+          <input type="email" class="form-control" formControlName="email" name="email" required email>
+          <div *ngIf="signupForm.controls.email.invalid && 
+                      signupForm.controls.email.dirty" 
+                      class="alert alert-danger">
+                  Fill in an email.
+          </div>
+          <div *ngIf="userService.emailExists(signupForm.controls.email.value)" class="alert alert-danger">
+            That user exists.
+          </div>
+      </div>
+      <div class="form-group">
+        <input *ngIf="signupForm.invalid || userService.emailExists(signupForm.controls.email.value); else activeSubmit" type="submit" value="Sign Up" disabled>
+        <ng-template #activeSubmit>
+            <input type="submit" value="Sign Up">
+        </ng-template>
+
+      </div>
+    </div>
+    
+  </form>
+  
+
+  
+

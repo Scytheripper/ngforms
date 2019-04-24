@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngforms';
+  title = 'Form Example';
+  constructor(private userService: UserService){}
+
+  userLoggedIn() {
+    if(this.userService.currentUser !== null) {
+      return true;
+    }
+    return false  ;
+  }
+
+  logout() {
+    this.userService.logout();
+  }
 }

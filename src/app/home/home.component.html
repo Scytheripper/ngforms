@@ -1,0 +1,6 @@
+<h1>Welcome!</h1>
+<div *ngIf="userService.currentUser !== null">
+    <p>{{userService.currentUser.firstName}}</p>
+    <p>{{userService.currentUser.lastName}}</p>
+    <p>{{userService.currentUser.email}}</p>
+</div>
